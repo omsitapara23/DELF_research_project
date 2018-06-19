@@ -1,0 +1,32 @@
+Commands for importing delf in our server 
+
+cd protoc/
+PATH_TO_PROTOC=`pwd`
+cd ..
+cd models/research/
+export PYTHONPATH=$PYTHONPATH:`pwd`
+cd delf/
+${PATH_TO_PROTOC?}/bin/protoc delf/protos/*.proto --python_out=.
+cd delf/python/examples/
+
+
+Before matching images enter this command to add the image to list 
+
+make sure you are in /examples dir
+echo path_to_image_1 >> list_images.txt
+echo path_to_image_2 >> list_images.txt
+ 
+
+For match images
+
+python3 extract_features.py   --config_path delf_config_example.pbtxt   --list_images_path list_images.txt   --output_dir data/oxford5k_features
+python3 match_images.py   --image_1_path data/oxford5k_images/hertford_000056.jpg   --image_2_path data/oxford5k_images/oxford_000317.jpg   --features_1_path data/oxford5k_features/hertford_000056.delf   --features_2_path data/oxford5k_features/oxford_000317.delf   --output_image matched_images.png
+
+
+python3 extract_features.py -i list_images.txt -o /../../../../../../media/sdi/dinesh/Landmark/test_images_temp.csv
+
+CUDA_VISIBLE_DEVICES=x python3 extract_features.py -i train_x.txt -o /../../../../../../media/sdx/landmark/train_x.csv
+
+
+CUDA_VISIBLE_DEVICES=4 python3 extract_features.py -i train_4.txt -o /../../../../../../media/sdi/dinesh/Landmark/trainFeatures/train4.csv
+
